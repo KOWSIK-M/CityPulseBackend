@@ -25,7 +25,7 @@ import com.klef.jfsd.springboot.service.UserService;
 
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://city-pulse-jade.vercel.app")
 public class AdminController {
 	
 	@Autowired
