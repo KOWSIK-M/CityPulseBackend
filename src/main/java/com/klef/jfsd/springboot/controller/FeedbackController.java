@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = {"https://citypulse-kowsik.vercel.app", "http://localhost:3000"})
 public class FeedbackController {
 
     @Autowired

@@ -16,6 +16,7 @@ import com.klef.jfsd.springboot.service.ForumService;
 
 @RestController
 @RequestMapping("/api/forums")
+@CrossOrigin(origins = {"https://citypulse-kowsik.vercel.app", "http://localhost:3000"})
 public class ForumController {
 
     @Autowired
