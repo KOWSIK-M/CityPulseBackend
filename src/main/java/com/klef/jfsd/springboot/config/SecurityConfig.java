@@ -32,7 +32,7 @@ public class SecurityConfig {
 		http.csrf(customizer -> customizer.disable());
 		http.cors(Customizer.withDefaults());
 		http.authorizeHttpRequests(request -> request
-				.requestMatchers("/api/users/register","/api/users/login","api/users/updateProfile","api/users/updatePassword","/api/feedbacks","/api/admin/count","/api/admin/feedback-count","/api/admin/payment-stats","/api/admin/city-stats","/api/admin/login","/api/admin/allusers","/api/admin/allfeedbacks","/api/admin/approve/*","/api/admin/unapproved","/api/admin/status*","/api/forums/add","/api/forums/like/*","/api/forums/comment","/api/forums/all")
+				.requestMatchers("/api/users/register","/api/users/login","/api/users/updatePhoto","/api/users/updateProfile","api/users/updatePassword","/api/feedbacks","/api/admin/count","/api/admin/feedback-count","/api/admin/payment-stats","/api/admin/city-stats","/api/admin/login","/api/admin/allusers","/api/admin/allfeedbacks","/api/admin/approve/*","/api/admin/unapproved","/api/admin/status*","/api/forums/add","/api/forums/like/*","/api/forums/comment","/api/forums/all")
 				.permitAll()
 				.requestMatchers("/api/feedbacks*").permitAll()
 				.anyRequest().authenticated());
