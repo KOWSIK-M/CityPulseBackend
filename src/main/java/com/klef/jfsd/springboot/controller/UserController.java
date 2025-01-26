@@ -72,21 +72,32 @@ public class UserController {
     }
     
     @PutMapping("/updateProfile")
-    public ResponseEntity<?> updateProfile(
-        @RequestParam("user") String userJson,
-        @RequestParam(value = "profileImage", required = false) MultipartFile profileImage
+    public Users updateProfile(
+        @RequestPart("user") Users user, 
+        @RequestPart(value = "profileImage", required = false) MultipartFile profileImage
     ) {
-        try {
-            // Convert JSON string to User object
-            ObjectMapper mapper = new ObjectMapper();
-            Users user = mapper.readValue(userJson, Users.class);
-
-            Users updatedUser = userService.updateProfile(user, profileImage);  // Call the service with the image
-            return ResponseEntity.ok(updatedUser);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+        Users existingUser = userRepository.findByEmail(user.getEmail());
+        if (existingUser == null) {
+            throw new RuntimeException("User not found");
         }
+
+        existingUser.setUsername(user.getUsername());
+        existingUser.setDob(user.getDob());
+        existingUser.setCity(user.getCity());
+        existingUser.setContact(user.getContact());
+
+        if (profileImage != null && !profileImage.isEmpty()) {
+            try {
+                String photoUrl = cloudinaryService.uploadFile(profileImage);
+                existingUser.setPhotoUrl(photoUrl);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to upload profile image", e);
+            }
+        }
+
+        return userRepository.save(existingUser);
     }
+
 
     @PostMapping("/updatePassword")
     public ResponseEntity<String> updatePassword(@RequestBody Users user) {
