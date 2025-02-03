@@ -19,6 +19,7 @@ public class Forum {
 
     private String issue;
     private String msg;
+    @Column(columnDefinition = "TIME")
     private Time time;
     private Date date;
 
