@@ -21,7 +21,7 @@ public class Feedbacks {
     @JoinColumn(name = "user_id", referencedColumnName = "id")  // Join by user ID (foreign key)
     private Users user;  // User entity to link feedback with the user
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, columnDefinition = "VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci")
     private String location;
 
     @Column(nullable = false, length = 255)
